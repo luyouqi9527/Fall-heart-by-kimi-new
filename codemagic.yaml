@@ -1,0 +1,15 @@
+workflows:
+  default-workflow:
+    name: Default Workflow
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+    scripts:
+      - name: 生成全新的安卓配置（V2嵌入）
+        script: |
+          flutter create --platforms=android .
+      - name: 构建调试APK
+        script: |
+          flutter build apk --debug
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
