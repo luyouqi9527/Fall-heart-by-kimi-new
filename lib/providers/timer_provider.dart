@@ -37,10 +37,10 @@ class TimerProvider extends ChangeNotifier {
     if (total <= 0) return;
 
     final perm = await NotificationHelper.requestPermission();
-    if (perm != NotificationPermission.granted) {
-      throw Exception('需要通知权限才能开始专注');
-    }
-
+    final granted = await NotificationHelper.requestPermission();
+if (!granted) {
+  throw Exception('需要通知权限才能开始专注');
+}
     _totalSeconds = total;
     _remainingSeconds = total;
     _plannedMinutes = total ~/ 60;
